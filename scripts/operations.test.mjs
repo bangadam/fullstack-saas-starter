@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { buildOperation, runOperation } from './operations.mjs'
 
- test('explicit environment and target required; all operations default to dry run', async () => {
+test('explicit environment and target required; all operations default to dry run', async () => {
   assert.throws(() => buildOperation(['inspect']), /environment/)
   assert.throws(() => buildOperation(['inspect', '--env', 'production']), /--remote/)
   const op = buildOperation(['inspect', '--env', 'local'])

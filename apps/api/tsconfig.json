@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["@cloudflare/workers-types"],
+    "paths": {
+      "@saas/*": ["../../packages/*/src"]
+    }
+  },
+  "include": ["src", "test", "worker-configuration.d.ts"],
+  "exclude": ["node_modules", "dist", ".wrangler"]
+}

@@ -1,0 +1,5 @@
+export * from './config-schema.js'
+export * from './doctor.js'
+export * from './secret-scan.js'
+export * from './write-files.js'
+export { buildProgram, main } from './cli.js'

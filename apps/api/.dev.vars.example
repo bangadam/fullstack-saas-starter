@@ -1,0 +1,34 @@
+# Copy to .dev.vars (gitignored) and fill with real dev values.
+# The web proxy forwards paths unchanged over the service binding:
+#   web /api/auth/* -> api /api/auth/*
+#   web /api/projects -> api /api/projects
+#   web /webhooks/* -> api /webhooks/*
+# Therefore APP_URL must reference the PUBLIC web origin. Better Auth's
+# basePath is /api/auth and the proxy forwards paths unchanged, so generated
+# email links and OAuth callbacks are correct without extra configuration.
+
+# Auth
+BETTER_AUTH_SECRET=dev-only-secret-replace-me-0123456789abcdef
+
+# Billing
+POLAR_ACCESS_TOKEN=
+POLAR_WEBHOOK_SECRET=
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+
+# Email
+RESEND_API_KEY=
+EMAIL_FROM=dev@localhost
+
+# Google OAuth
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+# Account security challenge (public site key + server secret; optional locally)
+TURNSTILE_SITE_KEY=
+TURNSTILE_SECRET_KEY=
+
+# R2 S3 signing credentials; bucket name comes from wrangler vars.
+R2_ACCESS_KEY_ID=
+R2_SECRET_ACCESS_KEY=
+CLOUDFLARE_ACCOUNT_ID=

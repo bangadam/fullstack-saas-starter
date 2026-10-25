@@ -1,0 +1,37 @@
+{
+  "name": "@saas/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --local",
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check src test",
+    "test": "vitest run",
+    "types": "wrangler types"
+  },
+  "dependencies": {
+    "@saas/auth": "workspace:*",
+    "@saas/billing": "workspace:*",
+    "@saas/config": "workspace:*",
+    "@saas/contracts": "workspace:*",
+    "@saas/db": "workspace:*",
+    "@saas/domain": "workspace:*",
+    "@saas/email": "workspace:*",
+    "@saas/jobs": "workspace:*",
+    "@saas/sdk": "workspace:*",
+    "@saas/storage": "workspace:*",
+    "better-auth": "^1.2.0",
+    "drizzle-orm": "^0.38.0",
+    "hono": "^4.6.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20251014.0",
+    "@cloudflare/vitest-pool-workers": "^0.8.19",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5",
+    "wrangler": "^4.0.0"
+  }
+}

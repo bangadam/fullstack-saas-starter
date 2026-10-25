@@ -1,0 +1,111 @@
+// Sourced from infra/cloudflare plan: single Jobs Worker consuming three queues
+// with a shared DLQ. D1 id is a placeholder resolved by the deployment CLI.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "saas-jobs",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-10-01",
+  "nodejs_compat": true,
+  // Local dev only — pins the port so parallel `pnpm dev` never races with api.
+  "dev": {
+    "port": 8788
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "saas-db",
+      "database_id": "REPLACE_WITH_D1_ID"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "saas-files"
+    }
+  ],
+  "queues": {
+    "consumers": [
+      {
+        "queue": "saas-email-queue",
+        "binding": "EMAIL_QUEUE",
+        "max_batch_size": 10,
+        "max_retries": 5,
+        "dead_letter_queue": "saas-dlq"
+      },
+      {
+        "queue": "saas-billing-queue",
+        "binding": "BILLING_QUEUE",
+        "max_retries": 5,
+        "dead_letter_queue": "saas-dlq"
+      },
+      {
+        "queue": "saas-cleanup-queue",
+        "binding": "CLEANUP_QUEUE",
+        "max_retries": 3,
+        "dead_letter_queue": "saas-dlq"
+      }
+    ]
+  },
+  "triggers": {
+    "crons": ["*/5 * * * *"]
+  },
+  "vars": {
+    "APP_NAME": "SaaS",
+    "APP_URL": "http://localhost:5173",
+    "EMAIL_FROM": "noreply@example.com",
+    "AUDIT_LOG_RETENTION_DAYS": "90",
+    "ORPHAN_OBJECT_GRACE_DAYS": "7",
+    "STALE_OUTBOX_HOURS": "24"
+  },
+  "env": {
+    "staging": {
+      "name": "saas-jobs-staging",
+      "vars": {
+        "APP_NAME": "SaaS",
+        "APP_URL": "https://saas-web-staging.bangadam-dev.workers.dev",
+        "EMAIL_FROM": "noreply@example.com",
+        "AUDIT_LOG_RETENTION_DAYS": "90",
+        "ORPHAN_OBJECT_GRACE_DAYS": "7",
+        "STALE_OUTBOX_HOURS": "24"
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "saas-db-staging",
+          "database_id": "8893886a-0cee-457a-a4f5-9911471b5716",
+          "migrations_dir": "../../packages/db/drizzle"
+        }
+      ],
+      // R2 belum diaktifkan di akun (API error 10042). Binding placeholder
+      // agar deploy jalan; aktifkan R2 lalu isi bucket_name asli.
+      "r2_buckets": [
+        {
+          "binding": "BUCKET",
+          "bucket_name": "saas-files-staging"
+        }
+      ],
+      "queues": {
+        "consumers": [
+          {
+            "queue": "saas-email-queue-staging",
+            "max_batch_size": 10,
+            "max_retries": 5,
+            "dead_letter_queue": "saas-dlq-staging"
+          },
+          {
+            "queue": "saas-billing-queue-staging",
+            "max_batch_size": 10,
+            "max_retries": 5,
+            "dead_letter_queue": "saas-dlq-staging"
+          },
+          {
+            "queue": "saas-cleanup-queue-staging",
+            "max_batch_size": 10,
+            "max_retries": 3,
+            "dead_letter_queue": "saas-dlq-staging"
+          }
+        ]
+      }
+    }
+  }
+}

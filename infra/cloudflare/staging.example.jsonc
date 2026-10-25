@@ -1,0 +1,67 @@
+// Staging — example per-environment values for reference.
+//
+// NOT the canonical configuration. Each Worker's deployment config lives in
+// apps/web/wrangler.jsonc, apps/api/wrangler.jsonc, apps/jobs/wrangler.jsonc
+// (resource names there are unsuffixed; each staging/production environment
+// uses the suffixed names below). This file only documents the differences
+// between staging and production.
+//
+// NEVER commit real IDs or secrets here. Secrets always go through
+// `wrangler secret put` or CI secrets, never config files.
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "account_id": "<CLOUDFLARE_ACCOUNT_ID>",
+
+  "vars": {
+    // Public origin of the staging Web Worker (workers.dev or staging hostname).
+    "APP_URL": "https://<staging-web-worker>.workers.dev",
+    // Note: auth links/callbacks derive from APP_URL + "/api" automatically
+    // (packages/auth/src/base-url.ts); BETTER_AUTH_URL is no longer needed.
+    "BILLING_PROVIDER": "polar",
+    "POLAR_ENVIRONMENT": "sandbox",
+    "ENVIRONMENT": "staging"
+    // Turnstile site key is a public var; the secret key stays in secrets.
+    // "TURNSTILE_SITE_KEY": "<site-key>"
+  },
+
+  // ── apps/api ────────────────────────────────────────────────────────────
+  // d1_databases:
+  //   binding: "DB"
+  //   database_name: "saas-db-staging"
+  //   database_id: "<D1_DATABASE_ID_STAGING>"
+  // r2_buckets:
+  //   binding: "BUCKET"
+  //   bucket_name: "saas-files-staging"
+  // queues producers (see apps/api/wrangler.jsonc for the canonical bindings):
+  //   EMAIL_QUEUE -> "saas-email-queue-staging"
+  //   BILLING_QUEUE -> "saas-billing-queue-staging" (when present)
+  //   CLEANUP_QUEUE -> "saas-cleanup-queue-staging" (when present)
+  // service_bindings (from apps/web):
+  //   binding: "API"
+  //   service: "saas-api-staging"
+
+  // ── apps/jobs ───────────────────────────────────────────────────────────
+  // queues consumers (one consumer per queue, shared DLQ):
+  //   queue: "saas-email-queue-staging"    -> dead_letter_queue: "saas-dlq-staging"
+  //   queue: "saas-billing-queue-staging"  -> dead_letter_queue: "saas-dlq-staging"
+  //   queue: "saas-cleanup-queue-staging"  -> dead_letter_queue: "saas-dlq-staging"
+  //   max_retries per queue matches apps/jobs/wrangler.jsonc
+  // d1_databases: binding "DB" -> saas-db-staging (<D1_DATABASE_ID_STAGING>)
+  // r2_buckets:   binding "BUCKET" -> saas-files-staging
+  // triggers.crons: same as dev (see apps/jobs/wrangler.jsonc)
+
+  // ── apps/web ────────────────────────────────────────────────────────────
+  // service_bindings:
+  //   binding: "API"
+  //   service: "saas-api-staging"
+  // routes / workers.dev:
+  //   workers_dev: true (staging is tested via workers.dev); production uses
+  //   custom domains via routes.
+
+  // Secrets that must be set via `wrangler secret put` per Worker (staging values):
+  //   apps/api: BETTER_AUTH_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET,
+  //             TURNSTILE_SECRET_KEY, RESEND_API_KEY,
+  //             POLAR_ACCESS_TOKEN, POLAR_WEBHOOK_SECRET
+  //             (or STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET for the Stripe adapter)
+  //   apps/jobs: billing token only if a job requires provider API access
+}

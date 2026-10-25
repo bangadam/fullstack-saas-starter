@@ -1,0 +1,67 @@
+// Production — example per-environment values for reference.
+//
+// NOT the canonical configuration. Each Worker's deployment config lives in
+// apps/web/wrangler.jsonc, apps/api/wrangler.jsonc, apps/jobs/wrangler.jsonc.
+// This file only documents the production vs staging differences:
+// custom domains, resource names (-production suffix), and placeholder IDs.
+//
+// NEVER commit real IDs or secrets here. Secrets always go through
+// `wrangler secret put` or CI secrets, never config files.
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "account_id": "<CLOUDFLARE_ACCOUNT_ID>",
+
+  "vars": {
+    // Production custom domain via explicit config/DNS approval.
+    "APP_URL": "https://app.example.com",
+    // Note: auth links/callbacks derive from APP_URL + "/api" automatically
+    // (packages/auth/src/base-url.ts); BETTER_AUTH_URL is no longer needed.
+    "BILLING_PROVIDER": "polar",
+    "POLAR_ENVIRONMENT": "production",
+    "ENVIRONMENT": "production"
+    // "TURNSTILE_SITE_KEY": "<site-key>"
+  },
+
+  // ── apps/api ────────────────────────────────────────────────────────────
+  // d1_databases:
+  //   binding: "DB"
+  //   database_name: "saas-db-production"
+  //   database_id: "<D1_DATABASE_ID_PRODUCTION>"
+  // r2_buckets:
+  //   binding: "BUCKET"
+  //   bucket_name: "saas-files-production"
+  // queues producers:
+  //   EMAIL_QUEUE -> "saas-email-queue-production"
+  //   BILLING_QUEUE -> "saas-billing-queue-production" (when present)
+  //   CLEANUP_QUEUE -> "saas-cleanup-queue-production" (when present)
+  // service_bindings (from apps/web):
+  //   binding: "API"
+  //   service: "saas-api-production"
+
+  // ── apps/jobs ───────────────────────────────────────────────────────────
+  // queues consumers (shared DLQ):
+  //   queue: "saas-email-queue-production"   -> dead_letter_queue: "saas-dlq-production"
+  //   queue: "saas-billing-queue-production" -> dead_letter_queue: "saas-dlq-production"
+  //   queue: "saas-cleanup-queue-production" -> dead_letter_queue: "saas-dlq-production"
+  // d1_databases: binding "DB" -> saas-db-production (<D1_DATABASE_ID_PRODUCTION>)
+  // r2_buckets:   binding "BUCKET" -> saas-files-production
+
+  // ── apps/web ────────────────────────────────────────────────────────────
+  // service_bindings:
+  //   binding: "API"
+  //   service: "saas-api-production"
+  // routes / custom domain:
+  //   route: "app.example.com/*" (zone: example.com, DNS approved explicitly)
+  //   workers_dev: false in production when a custom domain is used.
+
+  // Secrets that must be set via `wrangler secret put` per Worker (production values,
+  // DIFFERENT from staging):
+  //   apps/api: BETTER_AUTH_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET,
+  //             TURNSTILE_SECRET_KEY, RESEND_API_KEY,
+  //             POLAR_ACCESS_TOKEN, POLAR_WEBHOOK_SECRET
+  //             (or STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET for the Stripe adapter)
+  //   apps/jobs: billing token only if a job requires provider API access
+  //
+  // Note: the shared auth secret stays consistent across API replicas but
+  // differs between staging and production.
+}

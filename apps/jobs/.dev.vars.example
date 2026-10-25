@@ -1,0 +1,8 @@
+APP_NAME="SaaS"
+APP_URL="https://app.example.com"
+EMAIL_FROM="noreply@example.com"
+# Optional — without it the email handler marks rows failed instead of sending
+RESEND_API_KEY="re_xxxxxxxxxxxx"
+AUDIT_LOG_RETENTION_DAYS="90"
+ORPHAN_OBJECT_GRACE_DAYS="7"
+STALE_OUTBOX_HOURS="24"

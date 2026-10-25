@@ -1,0 +1,30 @@
+{
+  "name": "@saas/jobs-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --local",
+    "build": "wrangler deploy --dry-run --outdir dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check src",
+    "test": "vitest run",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@saas/billing": "workspace:*",
+    "@saas/config": "workspace:*",
+    "@saas/db": "workspace:*",
+    "@saas/domain": "workspace:*",
+    "@saas/email": "workspace:*",
+    "@saas/jobs": "workspace:*",
+    "drizzle-orm": "^0.38.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20251008.0",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.8",
+    "wrangler": "^4.0.0"
+  }
+}

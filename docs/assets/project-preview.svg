@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+  <title id="title">Fullstack SaaS — Cloudflare-native starter</title>
+  <desc id="desc">Illustrated project overview, not a screenshot. A landing-page concept alongside personal accounts, projects, storage, billing, and background jobs.</desc>
+  <rect width="1440" height="900" rx="24" fill="#f1f0ec"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="64" y="66" fill="#62645e" font-size="16" font-weight="700" letter-spacing="3">FULLSTACK SAAS / PROJECT OVERVIEW</text>
+    <rect x="1150" y="40" width="226" height="34" rx="17" fill="#e3e6dc"/>
+    <circle cx="1173" cy="57" r="5" fill="#48613b"/>
+    <text x="1188" y="63" fill="#36472e" font-size="14" font-weight="700">BUILT FOR CLOUDFLARE</text>
+    <text x="64" y="153" fill="#181b17" font-size="56" font-weight="700" letter-spacing="-2">Your product. One edge stack.</text>
+    <text x="67" y="195" fill="#63675e" font-size="22">SSR web + typed API + durable data. No long-lived servers to manage.</text>
+    <rect x="64" y="241" width="914" height="556" rx="16" fill="#dcded6"/>
+    <rect x="64" y="233" width="914" height="556" rx="16" fill="#ffffff" stroke="#d8dad2"/>
+    <path d="M80 233 H962 Q978 233 978 249 V281 H64 V249 Q64 233 80 233" fill="#f8f9f5"/>
+    <circle cx="88" cy="257" r="5" fill="#c5c8be"/><circle cx="107" cy="257" r="5" fill="#c5c8be"/><circle cx="126" cy="257" r="5" fill="#c5c8be"/>
+    <rect x="337" y="245" width="368" height="24" rx="6" fill="#eceee7"/>
+    <text x="521" y="262" text-anchor="middle" fill="#777c6e" font-size="12">LOCAL DEVELOPMENT · localhost:3000</text>
+    <rect x="96" y="307" width="30" height="30" rx="7" fill="#1c2118"/>
+    <text x="111" y="328" text-anchor="middle" fill="#fff" font-size="19" font-weight="700">S</text>
+    <text x="138" y="329" fill="#20251b" font-size="18" font-weight="700">SaaS Starter</text>
+    <text x="697" y="327" fill="#777c70" font-size="14">Pricing</text><text x="772" y="327" fill="#333a2d" font-size="14">Log in</text>
+    <rect x="835" y="306" width="111" height="33" rx="6" fill="#23291d"/>
+    <text x="890" y="327" text-anchor="middle" fill="#fff" font-size="13">Get started</text>
+    <line x1="64" y1="359" x2="978" y2="359" stroke="#eceee7"/>
+    <rect x="395" y="397" width="252" height="28" rx="14" fill="#eef1e8"/>
+    <text x="521" y="416" text-anchor="middle" fill="#4b5a3d" font-size="13" font-weight="700">Cloudflare-native boilerplate</text>
+    <text x="521" y="487" text-anchor="middle" fill="#1c2217" font-size="42" font-weight="700" letter-spacing="-1">Ship your SaaS on</text>
+    <text x="521" y="537" text-anchor="middle" fill="#1c2217" font-size="42" font-weight="700" letter-spacing="-1">Cloudflare, faster.</text>
+    <text x="521" y="579" text-anchor="middle" fill="#74796c" font-size="16">Authentication, billing, files, and jobs — connected.</text>
+    <rect x="354" y="608" width="158" height="42" rx="7" fill="#25331c"/>
+    <text x="433" y="635" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Start for free →</text>
+    <rect x="527" y="608" width="158" height="42" rx="7" fill="#fff" stroke="#daddd2"/>
+    <text x="606" y="635" text-anchor="middle" fill="#454e3b" font-size="14">View pricing</text>
+    <line x1="96" y1="692" x2="946" y2="692" stroke="#eceee7"/>
+    <text x="141" y="733" fill="#707866" font-size="12" letter-spacing="1">FRONTEND</text><text x="141" y="757" fill="#293122" font-size="16" font-weight="700">TanStack Start</text>
+    <text x="359" y="733" fill="#707866" font-size="12" letter-spacing="1">API</text><text x="359" y="757" fill="#293122" font-size="16" font-weight="700">Hono + Zod</text>
+    <text x="563" y="733" fill="#707866" font-size="12" letter-spacing="1">DATA</text><text x="563" y="757" fill="#293122" font-size="16" font-weight="700">D1 + Drizzle</text>
+    <text x="767" y="733" fill="#707866" font-size="12" letter-spacing="1">RUNTIME</text><text x="767" y="757" fill="#293122" font-size="16" font-weight="700">Workers</text>
+    <rect x="1004" y="233" width="372" height="556" rx="16" fill="#25311f"/>
+    <text x="1036" y="280" fill="#b6c6a8" font-size="13" font-weight="700" letter-spacing="2">WHAT'S INSIDE</text>
+    <text x="1036" y="328" fill="#f5f8ef" font-size="28" font-weight="700">From sign-in</text>
+    <text x="1036" y="363" fill="#f5f8ef" font-size="28" font-weight="700">to subscription.</text>
+    <g fill="#eef4e8" font-size="17" font-weight="700">
+      <text x="1036" y="423">01   Personal accounts</text>
+      <text x="1036" y="489">02   Projects + plan quotas</text>
+      <text x="1036" y="555">03   R2 file storage</text>
+      <text x="1036" y="621">04   Stripe / Polar billing</text>
+      <text x="1036" y="687">05   Queues + recovery</text>
+    </g>
+    <g fill="#a8ba99" font-size="13">
+      <text x="1075" y="445">Better Auth · sessions · verification</text>
+      <text x="1075" y="511">User-scoped data · conditional writes</text>
+      <text x="1075" y="577">Uploads · downloads · lifecycle</text>
+      <text x="1075" y="643">Checkout · portal · entitlements</text>
+      <text x="1075" y="709">Email outbox · retries · Cron</text>
+    </g>
+    <line x1="1036" y1="742" x2="1344" y2="742" stroke="#4a5c3d"/>
+    <text x="1036" y="769" fill="#b6c6a8" font-size="12">B2C ACCOUNTS · TYPESCRIPT MONOREPO</text>
+    <text x="64" y="847" fill="#697060" font-size="14">ILLUSTRATED OVERVIEW · NOT A LIVE DEPLOYMENT</text>
+    <text x="1376" y="847" text-anchor="end" fill="#444e3b" font-size="15" font-weight="700">pnpm dev → localhost:3000</text>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "types": ["@cloudflare/workers-types/2023-07-01", "vite/client"],
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": false,
+    "noEmit": true,
+    "allowImportingTsExtensions": false,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  },
+  "include": ["src", "worker-configuration.d.ts", "vite.config.ts"]
+}

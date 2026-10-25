@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "saas-web",
+  "compatibility_date": "2026-10-24",
+  "compatibility_flags": ["nodejs_compat"],
+  // Custom entry wrapping the Start handler with the /api proxy (src/worker.ts);
+  // the vite plugin bundles it during `vite build`.
+  "main": "src/worker.ts",
+  "observability": { "enabled": true },
+  "assets": {
+    "not_found_handling": "none",
+    "run_worker_first": ["/api/*", "/webhooks/*"]
+  },
+  "services": [
+    {
+      "binding": "API_WORKER",
+      "service": "saas-api"
+    }
+  ],
+  "env": {
+    "staging": {
+      "name": "saas-web-staging",
+      "services": [
+        {
+          "binding": "API_WORKER",
+          "service": "saas-api-staging"
+        }
+      ]
+    }
+  }
+}
